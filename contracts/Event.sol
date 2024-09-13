@@ -24,7 +24,7 @@ contract NFTEvent {
     // address[] public attendants;
 
     constructor (address _owner, address _eventMaster) external {
-            require(owner[msg.sender] != address(0),"Invalid address");
+            require(owner != address(0),"Invalid address");
             require(eventMaster != address(0),"Invalid address");
 
             owner = _owner;
