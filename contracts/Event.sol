@@ -1,7 +1,7 @@
 //SPDX-License-Identifier : MIT
 pragma solidity ^0.8.26;
 
-    "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+  import   "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract NFTEvent {
 
@@ -23,7 +23,7 @@ contract NFTEvent {
 
     // address[] public attendants;
 
-    constructor (address _owner, address _eventMaster) external {
+    constructor (address _owner, address _eventMaster)  {
             require(owner != address(0),"Invalid address");
             require(eventMaster != address(0),"Invalid address");
 
@@ -31,38 +31,40 @@ contract NFTEvent {
 
             eventMaster = _eventMaster;
 
-    modifier onlyOwner{
-        require(owner == msg.sender,"Only owner can perform this action")
+    }
+
+        modifier onlyOwner {
+        require(owner == msg.sender,"Only owner can perform this action");
         _;
     }
 
-    modifier onlyeventMaster{
-        require(eventMaster == msg.sender,"Only Event Master can perform this action")
+    modifier onlyEventMaster{
+        require(eventMaster == msg.sender,"Only Event Master can perform this action");
         _;
     }
 
-        function createEvent(uint _date, uint _time, uint _eventId, uint _ticketId ) external onlyeventMaster{
+        function createEvent(uint _date, uint _time, uint _eventId, uint _ticketId ) external onlyEventMaster{
             EventInfo storage eventInfo = events[_eventId];
 
-            events.date = _date;
+            eventInfo.date = _date;
 
-            events.time = _time;
+           eventInfo.time = _time;
 
-            events.ticketId = _ticketId;
+            eventInfo.ticketId = _ticketId;
 
     }
 
-        function mintTicket() external {
-            require(!hasMintedTicket[msg.sender],"Already minted NFT!");
+        // function mintTicket(uint _eventId) external {
+        //     require(!hasMintedTicket[msg.sender],"Already minted NFT!");
 
-            hasMintedTicket[msg.sender][_eventId] = true;
-            events[_eventId].attendees.push(msg.sender);
-            noOfAttendants++;
+        //     hasMintedTicket[msg.sender][_eventId] = true;
+        //     events[_eventId].attendees.push(msg.sender);
+        //     noOfAttendants++;
 
-        }  
+        // }  
 
 
-        function getCreatedEvents(uint _eventId) external view onlyOwner returns (EventInfo memory) onlyOwner {
+        function getCreatedEvents(uint _eventId) external view onlyOwner returns (EventInfo memory) {
             return events[_eventId];
 
         }
@@ -76,4 +78,3 @@ contract NFTEvent {
 
     }
 
-}
