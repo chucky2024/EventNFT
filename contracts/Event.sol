@@ -21,7 +21,7 @@ contract NFTEvent {
     mapping(address => mapping(uint => bool)) public hasMintedTicket;//checks if an attendee already has an NFT.
     mapping(uint => EventInfo ) public events;//stores event information.
 
-    address[] public attendants;
+    // address[] public attendants;
 
     constructor (address _owner, address _eventMaster) external {
             require(owner[msg.sender] != address(0),"Invalid address");
@@ -62,7 +62,7 @@ contract NFTEvent {
         }  
 
 
-        function getCreatedEvents(uint _eventId) external returns (EventInfo memory) onlyOwner {
+        function getCreatedEvents(uint _eventId) external view onlyOwner returns (EventInfo memory) onlyOwner {
             return events[_eventId];
 
         }
