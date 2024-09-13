@@ -62,7 +62,7 @@ contract NFTEvent {
         }  
 
 
-        function getCreatedEvents(uint _eventId) external returns (uint256) onlyOwner {
+        function getCreatedEvents(uint _eventId) external returns (EventInfo memory) onlyOwner {
             return events[_eventId];
 
         }
