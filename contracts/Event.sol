@@ -67,7 +67,11 @@ contract NFTEvent {
 
         }
             
-
+         //function to change event master
+    function setEventMaster(address _newEventMaster) external onlyOwner {
+        require(_newEventMaster != address(0), "Invalid new event master address");
+        eventMaster = _newEventMaster;
+    }
 
 
     }
